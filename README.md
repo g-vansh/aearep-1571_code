@@ -16,14 +16,14 @@ python run_script.py (DIRECTORY) "(GLOBPAT)" APIKEY [DEPOSITID]
 ```
 where parameters are as follows:
 
-- `(DIRECTORY)`: directory containing the files
+- `(DIRECTORY)`: directory containing the files to upload
 - `(GLOBPAT)`: glob pattern for files to upload (e.g., `"*.7z"`). Should include the quotes.
 - `APIKEY`: API key generated as per https://developers.zenodo.org/#authentication
 - (optional) `DEPOSITID`: If a deposit has already been initiated manually on Zenodo, then specify it on the command line. Otherwise, a new deposit will be generated.
 
 ## Finalizing
 
-The script only uploads the files. All metadata will need to be entered through the Zenodo web interface. The URL is printed to the console.
+The script only uploads the files. All metadata will need to be entered through the Zenodo web interface. The URL is printed to the console. Publishing the deposit is intentionally manual.
 
 ## Notes
 
