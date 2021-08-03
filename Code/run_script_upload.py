@@ -42,13 +42,13 @@ for file in glob.glob(search_pattern, recursive = subdir):
             print("Error Uploading File: {0}, Error Code: {1}".format(filename,r.status_code))
 
             # Logging an unsuccessful attempt in root directory
-            with open((root_dir+"/error_log.txt"),"a+") as logger_file:
+            with open((root_dir+"/upload_error_log.txt"),"a+") as logger_file:
                 logger_file.write(("Error Uploading File: {0}, Error Code: {1}".format(file,r.status_code))+"\n")
         else:
             print("Uploading Successful For: "+filename)
 
 # Adding documentation for debugging errors
-with open((root_dir+"/error_log.txt"),"a+") as logger_file:
+with open((root_dir+"/upload_error_log.txt"),"a+") as logger_file:
     logger_file.write("Please check the descriptions of the error codes at: https://developers.zenodo.org/#http-status-codes"+"\n")
 
         
