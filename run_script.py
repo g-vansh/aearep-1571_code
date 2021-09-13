@@ -8,27 +8,34 @@ import ntpath
 # Change Directory To The Root Directory, please ensure that there is no slash symbol in the end
 #root_dir = "C:/Users/vg224_RS/sample_folder"
 root_dir = sys.argv[1]
-os.chdir(root_dir)
-search_path = root_dir + "/"
 
 # Extension To Be Searched
 #ext = "*.py"
 ext = sys.argv[2]
-search_pattern = search_path + ext
-
-print("Search pattern:" + search_pattern)
 
 # Change Access Token
 #ACCESS_TOKEN = "CHANGE_ME"
 ACCESS_TOKEN = sys.argv[3]
-DEPOSITION_ID = "4317553"
+DEPOSITION_ID = sys.argv[4]
+
+#====================== hard-coded parameters - CHANGE IF NECESSARY ======================================
 # Base URL: could be the sandbox!
+# BASE_URL = "https://sandbox.zenodo.org/api/deposit/depositions"
 BASE_URL = "https://zenodo.org/api/deposit/depositions"
 
 # Would you like to search the subdirectories in the directory as well? 
 # "True" for Yes, "False" for No. 
 # "True" by default.
 subdir = False
+
+#============================= NO FURTHER CHANGES NEEDED BEYOND HERE =======================================
+
+# setting search_pattern to be full path
+os.chdir(root_dir)
+search_path = root_dir + "/"
+search_pattern = search_path + ext
+
+print("Search pattern:" + search_pattern)
 
 # Configuring Script For Zenodo Upload
 params = {'access_token': ACCESS_TOKEN}
