@@ -53,20 +53,29 @@ input("Press Enter to continue...")
 # Parsing through each file and uploading it
 for file in glob.glob(search_pattern, recursive = subdir):
     filename = ntpath.basename(file)
+    needupload = 1
+    for item in r.json()['files']:
+        if filename == item['filename']:
+           needupload = 0
+    if needupload == 0:
+           print("Filename " + filename + " present")
+           continue
+
     print("Starting upload for file: "+filename)
     path = os.path.abspath(file)
 
     # Uploading each file
     with open(path, "rb") as fp:
-        r = requests.put("%s/%s" % (bucket_url, filename),data = fp,params = params)
+        rput = requests.put("%s/%s" % (bucket_url, filename),data = fp,params = params)
 
         # Checking if upload was successful
-        if (r.status_code!=200):
-            print("Error Uploading File: {0}, Error Code: {1}".format(filename,r.status_code))
-
+        if (rput.status_code!=200):
+            print("Error Uploading File: {0}, Error Code: {1}".format(filename,rput.status_code))
+             
             # Logging an unsuccessful attempt in root directory
             with open((root_dir+"/error_log.txt"),"a+") as logger_file:
-                logger_file.write(("Error Uploading File: {0}, Error Code: {1}".format(file,r.status_code))+"\n")
+                logger_file.write(("Error Uploading File: {0}, Error Code: {1}".format(file,rput.status_code))+"\n")
+                logger_file.write(rput.json()['message']+"\n")
         else:
             print("Uploading Successful For: "+filename)
 
